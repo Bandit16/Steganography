@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 test.py
 *.jpg
-*.DS_Store
+*/.DS_Store
 # C extensions
 *.so
 
