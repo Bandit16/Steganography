@@ -7,7 +7,9 @@ test.py
 */.DS_Store
 # C extensions
 *.so
-
+# Ignore Mac DS_Store files
+.DS_Store
+**/.DS_Stor
 # Distribution / packaging
 .Python
 build/
