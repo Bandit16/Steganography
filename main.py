@@ -10,8 +10,7 @@ height, width, _ = arr.shape
 print(arr[0,0,2])
 
 def string_to_binary(text):
-    binary_array = [ord(char) for char in text]
-    binary_array = np.array(binary_array , dtype=np.uint8)
+    binary_array = np.frombuffer(text.encode(), dtype=np.uint8)
     binary_array = np.unpackbits(binary_array)
     return binary_array
 
@@ -19,7 +18,7 @@ def string_to_binary(text):
 
 
 def embedd_message(text):
-    end_bits = np.array([1,1,1,1,1,1,1,1] , dtype=np.uint8)
+    end_bits = np.array([0,1,1,1,1,1,1,1] , dtype=np.uint8)
     text = np.concatenate((text, end_bits))
     text_length = text.size
     i = 0
