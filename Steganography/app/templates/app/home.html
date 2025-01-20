@@ -33,7 +33,16 @@
                 <h2 class="text-center">Welcome to Steganography App</h2>
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.as_p }}
+
+                    {% if form %}
+                    {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
                     <button type="submit" class="btn btn-primary btn-block">Submit</button>
                 </form>
                 <a href="{% url 'decode' %}" class="btn btn-secondary btn-block mt-3 custom-button">Go to Decode
