@@ -37,9 +37,6 @@ def file_to_zip_binary(file_path):
 
 
 def embedd_message(text):
-    #adding 83 1's to the end of the message
-    end_bits = np.array([0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] , dtype=np.uint8)
-    text = np.concatenate((text, end_bits))
     text_length = text.size
     i = 0
     for y in range(height):
@@ -80,12 +77,22 @@ def main():
     # embedd_message(text)
     # print('your message is now hidden.')
     text = file_to_zip_binary('test.py')
-    print(text)
-    # a , b  = analyze_consecutive_bits(text)
-    # print(a)
-    # print(b)
+    # print(text)
+    a , b  = analyze_consecutive_bits(text)
+    print(a)
+    print(b)
     print(text.size)
-    embedd_message(text)
+    text_size_binary = np.unpackbits(np.array([text.size], dtype=np.uint32).view(np.uint8))
+    print(text_size_binary)
+
+    len_text = np.concatenate((text_size_binary,text))
+    print(len_text.size)
+
+    embedd_message(len_text)
+
+    # defe = np.packbits(text_size_binary)
+    # defe = defe.view(np.uint32)[0]
+    # print(defe)
     print('your file is now hidden.')
 
 main()
