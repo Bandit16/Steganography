@@ -1,12 +1,12 @@
 from django import forms
-from .models import SecretMessage , DecodeMessage
+from .models import *
 
-class SecretMessageForm(forms.ModelForm):
+class EncodeMessageForm(forms.ModelForm):
     pin = forms.CharField(max_length=4, widget=forms.PasswordInput)
 
     class Meta:
-        model = SecretMessage
-        fields = ['Message', 'pin', 'Image','File']
+        model = EncodeMessage
+        fields = ['Message', 'pin', 'Image',]
         
 class DecodeMessageForm(forms.ModelForm):
     pin = forms.CharField(max_length=4, widget=forms.PasswordInput)
@@ -14,3 +14,15 @@ class DecodeMessageForm(forms.ModelForm):
         model = DecodeMessage
         fields = ['Image' , 'pin' ,]
         
+class EncodeFileForm(forms.ModelForm):
+    pin = forms.CharField(max_length=4, widget=forms.PasswordInput)
+    class Meta:
+        model = EncodeFile
+        fields = ['pin', 'Image','File',]
+
+
+class DecodeFileForm(forms.ModelForm):
+    pin = forms.CharField(max_length=4, widget=forms.PasswordInput)
+    class Meta:
+        model = DecodeFile
+        fields = ['Image' , 'pin' ,]

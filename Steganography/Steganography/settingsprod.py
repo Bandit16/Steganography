@@ -138,5 +138,6 @@ SITE_ID = 1
 
 CSRF_TRUSTED_ORIGINS = [
     'https://pleasing-guppy-hardy.ngrok-free.app',
+    'https://secretpixel.tech',
 ]
 

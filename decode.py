@@ -13,7 +13,7 @@ def binary_to_zip(binary):
     except zipfile.BadZipFile:
         return "File is not a zip file"
 
-image1 = Image.open('test_1.png')
+image1 = Image.open('modified_image.png')
 arr = np.array(image1)
 print(arr.size)
 height, width, _ = arr.shape
