@@ -68,7 +68,7 @@ def embedd_file(arr, text):
 
     return arr
 
-def len_of_file(arr):
+def len_of_file(arr , pin):
     height, width, _ = arr.shape
     len_binary = []
     for y in range(height):
@@ -76,20 +76,23 @@ def len_of_file(arr):
                 pixel_value = arr[y, x, 2]
                 last_bit = pixel_value & 1
                 len_binary.append(last_bit)
-    defe = np.packbits(len_binary)
-    defe = defe.view(np.uint32)[0]
+    # use decryption here
+    len_binary = custom_decrypt(np.array(len_binary, dtype=np.uint8), pin)
+    length = np.packbits(len_binary)
+    length = length.view(np.uint32)[0]
 
-    return defe
 
-def decode_file_func(arr):
+    return length
+
+def decode_file_func(arr , pin):
     height, width, _ = arr.shape
-    defe = len_of_file(arr) + 32   
+    length = len_of_file(arr , pin) + 32   
     binary = []
     count = 0
     flag = 0
     for y in range(height):
         for x in range(width):
-            if count < defe:
+            if count < length:
                 pixel_value = arr[y, x, 2]
                 last_bit = pixel_value & 1
                 if count < 32:
@@ -102,6 +105,30 @@ def decode_file_func(arr):
 
     binary = np.array(binary, dtype=np.uint8)
     return binary_to_zip(binary)
+
+def custom_encrypt(binary_data: np.ndarray, pin: str) -> np.ndarray:
+    pin_bytes = string_to_binary(pin)  # Convert PIN to binary
+
+    encrypted_bits = np.zeros_like(binary_data)
+    pin_length = len(pin_bytes)
+
+    for i in range(len(binary_data)):
+        key_bit = pin_bytes[i % pin_length]  # Cycle through PIN bits
+        encrypted_bits[i] = (binary_data[i] ^ key_bit) ^ ((key_bit << 1) & 1)  # New encryption formula
+
+    return encrypted_bits
+
+def custom_decrypt(encrypted_data: np.ndarray, pin: str) -> np.ndarray:
+    pin_bytes = string_to_binary(pin)  # Convert PIN to binary
+
+    decrypted_bits = np.zeros_like(encrypted_data)
+    pin_length = len(pin_bytes)
+
+    for i in range(len(encrypted_data)):
+        key_bit = pin_bytes[i % pin_length]  # Cycle through PIN bits
+        decrypted_bits[i] = (encrypted_data[i] ^ ((key_bit << 1) & 1)) ^ key_bit  # New decryption formula
+
+    return decrypted_bits
 
 
 
@@ -119,10 +146,11 @@ def api_encode_file(request):
         file_path = instance.File.name
         full_path = default_storage.path(file_path)
         #convert input file to zip and convert zip to binary
-        text = file_to_zip_binary(full_path)
-        text_size_binary = np.unpackbits(np.array([text.size], dtype=np.uint32).view(np.uint8))
-        binary_message = np.concatenate((text_size_binary,text))
-
+        binary_zip_data = file_to_zip_binary(full_path)
+        binary_zip_size = np.unpackbits(np.array([binary_zip_data.size], dtype=np.uint32).view(np.uint8))
+        # encryption
+        encrypted_size = custom_encrypt(binary_zip_size, pin)
+        binary_message = np.concatenate((encrypted_size, binary_zip_data))
 
         image = Image.open(image_full_path)
         arr = np.array(image)
@@ -157,7 +185,7 @@ def api_decode_file(request):
         full_path = default_storage.path(file_path)
         image = Image.open(full_path)
         arr = np.array(image)
-        decoded_file_path = decode_file_func(arr)
+        decoded_file_path = decode_file_func(arr , pin)
         # Build the absolute URL
         if decoded_file_path:
             absolute_url = request.build_absolute_uri(f'/media/extracted_files/{decoded_file_path}')
@@ -172,13 +200,14 @@ def decode_file(request):
     form = DecodeMessageForm(request.POST, request.FILES)
     if request.method == 'POST':
         if form.is_valid():
+            pin = form.cleaned_data.get('pin', None)  # Extract pin from form
             instance = form.save()
             print("form saved")
             file_path = instance.Image.name             
             full_path = default_storage.path(file_path)
             image = Image.open(full_path)
             arr = np.array(image)
-            decoded_file_path = decode_file_func(arr)
+            decoded_file_path = decode_file_func(arr , pin)
             if decoded_file_path:
                 absolute_url = default_storage.path(f'extracted_files/{decoded_file_path}')
                 print("decoded file",absolute_url)
@@ -199,6 +228,7 @@ def encode_file(request):
     form = EncodeFileForm(request.POST, request.FILES)
     if request.method == 'POST':
         if form.is_valid():
+            pin = form.cleaned_data.get('pin', None)  # Extract pin from form
             instance = form.save()
             id = instance.id
             image_file_path = instance.Image.name             
@@ -206,11 +236,13 @@ def encode_file(request):
 
             file_path = instance.File.name
             full_path = default_storage.path(file_path)
-            #convert input file to zip and convert zip to binary
-            text = file_to_zip_binary(full_path)
-            text_size_binary = np.unpackbits(np.array([text.size], dtype=np.uint32).view(np.uint8))
-            binary_message = np.concatenate((text_size_binary,text))
 
+            #convert input file to zip and convert zip to binary
+            binary_zip_data = file_to_zip_binary(full_path)
+            binary_zip_size = np.unpackbits(np.array([binary_zip_data.size], dtype=np.uint32).view(np.uint8))
+            # encryption
+            encrypted_size = custom_encrypt(binary_zip_size, pin)
+            binary_message = np.concatenate((encrypted_size, binary_zip_data))
 
             image = Image.open(image_full_path)
             arr = np.array(image)
@@ -252,7 +284,7 @@ def encode_message_func(arr, text):
                 i += 1
     return arr
 
-def decode_message_func(arr):
+def decode_message_func(arr, pin):
     height, width, _ = arr.shape
     binary = []
     count = 0
@@ -270,20 +302,21 @@ def decode_message_func(arr):
                     binary.append(last_bit)
                     count +=1
     binary = (np.array(binary[:-8] , dtype=np.uint8))
-    return binary_to_string(binary)
+    return binary_to_string(custom_decrypt(binary, pin))
 
 
 def decode_message(request):
     form = DecodeMessageForm(request.POST, request.FILES)
     if request.method == 'POST':
         if form.is_valid():
+            pin = form.cleaned_data.get('pin', None)  # Extract pin from form
             instance = form.save()
             print("form saved")
             file_path = instance.Image.name             
             full_path = default_storage.path(file_path)
             image = Image.open(full_path)
             arr = np.array(image)
-            decoded_message = decode_message_func(arr)
+            decoded_message = decode_message_func(arr, pin)
             
             return HttpResponse(decoded_message)
         
@@ -293,12 +326,16 @@ def decode_message(request):
     return render(request, 'app/decode.html', context)
 
 
+
 def encode_message(request):
     form = EncodeMessageForm(request.POST, request.FILES)
     if request.method == 'POST':
         if form.is_valid():
             instance = form.save()
             id = instance.id
+            pin = form.cleaned_data.get('pin', None)  # Extract pin from form
+            print(type(pin))
+            print(pin)
             message = instance.Message
             file_path = instance.Image.name             
             full_path = default_storage.path(file_path)
@@ -306,7 +343,10 @@ def encode_message(request):
             arr = np.array(image)
             
             binary_message = string_to_binary(message)
-            modified_arr = encode_message_func(arr, binary_message)
+            #encryption
+            encrypted_message = custom_encrypt(binary_message, pin)
+            
+            modified_arr = encode_message_func(arr, encrypted_message)
             modified_image = Image.fromarray(modified_arr)
             buffer = io.BytesIO()
             modified_image.save(buffer, format='PNG')
@@ -336,7 +376,10 @@ def api_encode_message(request):
         image = Image.open(full_path)
         arr = np.array(image)
         binary_message = string_to_binary(message)
-        modified_arr = encode_message_func(arr, binary_message)
+
+        encrypted_message = custom_encrypt(binary_message, pin)
+        modified_arr = encode_message_func(arr, encrypted_message)
+
         modified_image = Image.fromarray(modified_arr)
         buffer = io.BytesIO()
         modified_image.save(buffer, format='PNG')
@@ -362,7 +405,7 @@ def api_decode_message(request):
         full_path = default_storage.path(file_path)
         image = Image.open(full_path)
         arr = np.array(image)
-        decoded_message = decode_message_func(arr)
+        decoded_message = decode_message_func(arr, pin)
         return Response({"DecodedMessage": decoded_message})  
     return Response(serializer.errors, status=400)
 
