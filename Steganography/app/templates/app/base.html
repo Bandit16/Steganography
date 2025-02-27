@@ -52,16 +52,20 @@
                 </li>
             </ul>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="{% static 'app/base.js' %}"></script>
+
     </nav>
     <div class="container">
         {% block content %}
 
         {% endblock content %}
     </div>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Include Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <!-- Include Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'app/base.js' %}"></script>
 </body>
 <footer
     style="position: fixed; bottom: 0; width: 100%; text-align: center; opacity: 0.5; background-color: inherit;padding-block: 2rem">

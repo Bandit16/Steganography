@@ -23,7 +23,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 form-container">
-                <h2 class="text-center">Let's {% if 'encode_message' in request.path %}
+                <h2 class="text-center"
+                    style="background: linear-gradient(to right, #0066ff, #a8da04, #0db7d1); -webkit-background-clip: text; color: transparent;">
+                    Let's {% if 'encode_message' in request.path %}
                     Encode Message
                     {% elif 'encode_file' in request.path %}
                     Encode File
@@ -44,6 +46,10 @@
 
 
                         {{ field }}
+                        {% if field.name == 'pin' %}
+                        <small class="form-text text-muted">Default value of pin is '0000'.</small>
+                        {% endif %}
+
 
                         {% if field.name == 'File' %}
 
@@ -69,9 +75,9 @@
                     <div class="button-wrap" style="text-align: center; width: 20%;">
                         <button type="submit">
                             {% if 'decode' in request.path %}
-                            <span style="color: rgb(255, 68, 0);">Extract</span>
+                            <span style="color: rgb(255, 68, 0); font-weight: bold;">Extract</span>
                             {% else %}
-                            <span style="color: cyan;">Generate</span>
+                            <span class="span-btn" style="color: rgb(5, 172, 172);font-weight: bold; ">Generate</span>
                             {% endif %}
                         </button>
                         <div class="button-shadow"></div>
@@ -251,7 +257,7 @@
 
         /* ========== BUTTON BASE STYLES ========== */
 
-        button {
+        .form-container button {
             /* Basic Styling */
             --border-width: clamp(1px, 0.0625em, 4px);
             all: unset;
@@ -556,14 +562,90 @@
 
         @media(prefers-color-scheme: dark) {}
 
+
+
+        #id_pin {
+            width: 8rem;
+            height: 2rem;
+            border: 1px solid #ccc;
+            color: cyan;
+
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            box-shadow: none;
+            transition: all 0.3s ease;
+            resize: none;
+            font-size: 2rem;
+            letter-spacing: 0.5rem;
+        }
+
+        #id_pin::placeholder {
+            color: #ccc;
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+
+            #id_Image,
+            #id_File {
+                width: 100%;
+            }
+
+            #id_Message {
+                width: 100%;
+            }
+
+            .button-shadow {
+                display: none;
+            }
+
+            .form-container {
+                padding: 20px;
+                margin-top: 40px;
+            }
+
+            .form-container h2 {
+                font-size: 1.5rem;
+            }
+
+            .button-wrap {
+                width: 100%;
+            }
+
+            button span {
+                font-size: 0.875rem;
+                padding-inline: 1em;
+                padding-block: 0.75em;
+            }
+
+        }
+
         @media(prefers-color-scheme: light) {
 
             #id_Message,
             #id_pin {
-                background-color: #f5f5f5;
+                color: teal;
+                background-color: #dddcdc;
 
 
             }
+
+        }
+
+        @media(prefers-color-scheme: dark) {
+
+
+            #id_pin {
+                color: cyan;
+                padding: 0.5rem;
+                border-radius: 0.25rem;
+                box-shadow: none;
+                transition: all 0.3s ease;
+                resize: none;
+                font-size: 2rem;
+                letter-spacing: 0.5rem;
+            }
+
         }
     </style>
 

@@ -655,3 +655,62 @@
     .button-wrap:has(button:active) span {
         text-shadow: 0.025em 0.25em 0.05em rgba(0, 0, 0, 0.12);
     }
+
+    @media (max-width: 768px) {
+        body {
+            padding: 1rem;
+        }
+
+        header {
+            padding-inline: 2rem;
+        }
+
+        footer {
+            padding-block: 1rem;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        .button-wrap button {
+            padding: 8px 16px;
+            font-size: 1rem;
+        }
+
+        .bear-link {
+            top: 0.5rem;
+            left: 0.5rem;
+            width: 36px;
+        }
+    }
+
+
+    @media (max-width: 400px) {
+        body {
+            padding: 0.5rem;
+        }
+
+        header {
+            padding-inline: 1rem;
+        }
+
+        footer {
+            padding-block: 0.5rem;
+        }
+
+        h1 {
+            font-size: 1.25rem;
+        }
+
+        .button-wrap button {
+            padding: 6px 12px;
+            font-size: 0.875rem;
+        }
+
+        .bear-link {
+            top: 0.25rem;
+            left: 0.25rem;
+            width: 24px;
+        }
+    }
