@@ -1,0 +1,111 @@
+
+body {
+    font-family: 'Geist',
+            'SF Pro Text',
+            'SF Pro Icons',
+            'AOS Icons',
+            'Helvetica Neue',
+            Helvetica,
+            Arial,
+            sans-serif,
+            system-ui;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.container {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #343a40;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+h2 {
+    font-weight: 500;
+}
+
+h3 {
+    color: #343a40;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.api-section {
+    margin-bottom: 40px;
+}
+
+.api-section h2 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.api-section p {
+    color: #6c757d;
+}
+
+.api-section pre {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    color: #333;
+    font-family: 'Geist',
+            'SF Pro Text',
+            'SF Pro Icons',
+            'AOS Icons',
+            'Helvetica Neue',
+            Helvetica,
+            Arial,
+            sans-serif,
+            system-ui;
+}
+
+.api-section code {
+    background-color: #e9ecef;
+    padding: 2px 4px;
+    border-radius: 3px;
+    color: #d63384;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+
+    .container {
+        background-color: #1e1e1e;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    h1,
+    h3 {
+        color: #e0e0e0;
+    }
+
+    .api-section h2 {
+        color: #90caf9;
+    }
+
+    .api-section p {
+        color: #b0b0b0;
+    }
+
+    .api-section pre {
+        background-color: #2e2e2e;
+        color: #e0e0e0;
+    }
+
+    .api-section code {
+        background-color: #424242;
+        color: #ff4081;
+    }
+}

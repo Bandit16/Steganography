@@ -7,8 +7,10 @@ urlpatterns = [
     path('api/decode_file/', views.api_decode_file),
     path('api/decode_message/', views.api_decode_message),
     path('encode_file/', views.encode_file, name='encode_file'),
-    path('', views.encode_message, name='encode_message'),
+    path('encode_message/', views.encode_message, name='encode_message'),
     path('decode_file/', views.decode_file, name='decode_file'),
     path('decode_message/', views.decode_message, name='decode_message'),
     path('about/', views.about, name='about'),
+    path('document/',views.document, name='document'),
+    path('', views.home, name='home'),
 ]

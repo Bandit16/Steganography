@@ -220,7 +220,7 @@ def decode_file(request):
     context = {
         'form': form
     }
-    return render(request, 'app/decode.html', context)
+    return render(request, 'app/for_all.html', context)
        
 
            
@@ -265,7 +265,7 @@ def encode_file(request):
         'form': form
     }
     print("notworking")
-    return render(request, 'app/home.html', context)
+    return render(request, 'app/for_all.html', context)
 
 
 	
@@ -323,7 +323,7 @@ def decode_message(request):
     context = {
         'form': form
     }
-    return render(request, 'app/decode.html', context)
+    return render(request, 'app/for_all.html', context)
 
 
 
@@ -359,8 +359,7 @@ def encode_message(request):
     context = {
         'form': form
     }
-    print("notworking")
-    return render(request, 'app/home.html', context)
+    return render(request, 'app/for_all.html', context)
 
 
 @api_view(['POST'])
@@ -411,3 +410,9 @@ def api_decode_message(request):
 
 def about(request):
     return render(request, 'app/about.html')
+
+def home(request):
+    return render(request, 'app/home.html')
+
+def document(request):
+    return render(request, 'app/document.html')

@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block content %}
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <link rel="stylesheet" href="{% static 'app/about.css' %}">
 </head>
+<!-- code here zione -->
+<!-- code your css at static/app/about.css -->
 
-<body>
-    <h1>Hello World!</h1>
-</body>
-
-</html>
-
-</html>
+{% endblock %}

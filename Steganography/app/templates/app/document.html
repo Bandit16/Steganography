@@ -1,0 +1,95 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'app/documentation.css' %}">
+</head>
+
+<div class="container">
+    <h1 class="text-center">API Documentation</h1>
+    <section class="api-section">
+        <h2>Encode File</h2>
+        <p>Endpoint: <code>/api/encode_file/</code></p>
+        <p>Method: <code>POST</code></p>
+        <p>Description: This endpoint allows you to encode a file into an image.</p>
+        <h3>Request</h3>
+        <pre>
+            {
+            "Image": "image_file.png",
+            "File": "file_to_encode.zip",
+            "pin": "1234"
+            }
+        </pre>
+        <h3>Response</h3>
+        <pre>
+            {
+            "ModifiedImage": "http://yourdomain.com/media/modified_image.png"
+            }
+        </pre>
+    </section>
+
+    <section class="api-section">
+        <h2>Decode File</h2>
+        <p>Endpoint: <code>/api/decode_file/</code></p>
+        <p>Method: <code>POST</code></p>
+        <p>Description: This endpoint allows you to decode a file from an image.</p>
+        <h3>Request</h3>
+        <pre>
+            {
+            "Image": "image_with_encoded_file.png",
+            "pin": "1234"
+            }
+        </pre>
+        <h3>Response</h3>
+        <pre>
+            {
+            "DecodedFile": "http://yourdomain.com/media/extracted_files/decoded_file.zip"
+            }
+        </pre>
+    </section>
+
+    <section class="api-section">
+        <h2>Encode Message</h2>
+        <p>Endpoint: <code>/api/encode_message/</code></p>
+        <p>Method: <code>POST</code></p>
+        <p>Description: This endpoint allows you to encode a message into an image.</p>
+        <h3>Request</h3>
+        <pre>
+            {
+            "Image": "image_file.png",
+            "Message": "Hello World",
+            "pin": "1234"
+            }
+        </pre>
+        <h3>Response</h3>
+        <pre>
+            {
+            "ModifiedImage": "http://yourdomain.com/media/modified_image.png"
+            }
+        </pre>
+    </section>
+
+    <section class="api-section">
+        <h2>Decode Message</h2>
+        <p>Endpoint: <code>/api/decode_message/</code></p>
+        <p>Method: <code>POST</code></p>
+        <p>Description: This endpoint allows you to decode a message from an image.</p>
+        <h3>Request</h3>
+        <pre>
+            {
+            "Image": "image_with_encoded_message.png",
+            "pin": "1234"
+            }
+        </pre>
+        <h3>Response</h3>
+        <pre>
+            {
+            "DecodedMessage": "Hello World"
+            }
+        </pre>
+    </section>
+</div>
+
+{% endblock %}

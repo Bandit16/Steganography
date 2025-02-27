@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Pixel</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'app/base.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-custom navbar-mainbg">
+        <a class="navbar-brand navbar-logo" href="{% url 'home' %}">
+            <img class="logo-dark" src="{% static 'app/2.png' %}" alt="Logo" style="height: 30px; margin-right: 10px;">
+            <img class="logo-light" src="{% static 'app/3.png' %}" alt="Logo" style="height: 30px; margin-right: 10px;">
+            Secret Pixel
+        </a>
+        <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <div class="hori-selector">
+                    <div class="left"></div>
+                    <div class="right"></div>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'encode_message' %}"><i class="fas fa-lock"></i>Encode Message</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'encode_file' %}"><i class="fas fa-file-upload"></i>Encode File</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'decode_message' %}"><i class="fas fa-key"></i>Decode Message</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'decode_file' %}"><i class="fas fa-file-download"></i>Decode
+                        File</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}"><i class="fas fa-info-circle"></i>About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'document' %}"><i class="fas fa-file-alt"></i>Documents</a>
+                </li>
+            </ul>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="{% static 'app/base.js' %}"></script>
+    </nav>
+    <div class="container">
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+</body>
+<footer
+    style="position: fixed; bottom: 0; width: 100%; text-align: center; opacity: 0.5; background-color: inherit;padding-block: 2rem">
+    secretpixel.tech &copy; 2025</footer>
+
+</html>
+
+<style>
+    @media(prefers-color-scheme: dark) {
+        .logo-light {
+            display: none;
+        }
+
+    }
+</style>
+
+<script>
+
+</script>

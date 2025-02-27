@@ -1,174 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+{% extends "app/base.html" %}
+{% block content %}
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Pixel</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-image: url('https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin: 0;
-        }
-
-        .navbar {
-            background-color: rgba(0, 0, 0, 0.7);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .navbar .navbar-brand {
-            color: #ffcc00 !important;
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-
-        .navbar .nav-link {
-            color: white !important;
-            transition: color 0.3s, background-color 0.3s;
-        }
-
-        .navbar .nav-link:hover,
-        .navbar .nav-link.active,
-        .navbar .nav-link.dropdown-toggle:hover {
-            color: #f8f9fa !important;
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 5px;
-        }
-
-        .dropdown-menu {
-            background-color: rgba(0, 0, 0, 0.7);
-            border: none;
-        }
-
-        .dropdown-item {
-            color: white !important;
-            transition: color 0.3s, background-color 0.3s;
-        }
-
-        .dropdown-item:hover,
-        .dropdown-item.active {
-            color: #f8f9fa !important;
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .form-container {
-            background: rgba(255, 255, 255, 0.85);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 600px;
-            transition: all 0.3s ease;
-            margin-top: 80px;
-        }
-
-        .form-container.active {
-            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
-            margin-top: 70px;
-        }
-
-        .form-container h2 {
-            margin-bottom: 20px;
-        }
-
-        .container {
-            margin-top: 80px;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-
-        .form-group label {
-            font-weight: bold;
-        }
-
-        .navbar-nav {
-            margin-left: auto;
-        }
-
-        .nav-item {
-            margin-right: 20px;
-        }
-    </style>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">Secret Pixel</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {% if 'encode' in request.path %}active{% endif %}" href="#"
-                        id="encodeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Encode
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="encodeDropdown">
-                        <a class="dropdown-item {% if request.path == '/encode_message/' %}active{% endif %}"
-                            href="{% url 'encode_message' %}">Encode Message</a>
-                        <a class="dropdown-item {% if request.path == '/encode_file/' %}active{% endif %}"
-                            href="{% url 'encode_file' %}">Encode File</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {% if 'decode' in request.path %}active{% endif %}" href="#"
-                        id="decodeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Decode
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="decodeDropdown">
-                        <a class="dropdown-item {% if request.path == '/decode_message/' %}active{% endif %}"
-                            href="{% url 'decode_message' %}">Decode Message</a>
-                        <a class="dropdown-item {% if request.path == '/decode_file/' %}active{% endif %}"
-                            href="{% url 'decode_file' %}">Decode File</a>
-                    </div>
-                </li>
-                <li>
-                    <a class="nav-link" href="#" style="background-color: transparent;">
-                        <i class="fas fa-user-secret" style="color: white;"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" href="#" style="background-color: transparent;">
-                        <i class="fas fa-user-secret" style="color: white;"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" href="#" style="background-color: transparent;">
-                        <i class="fas fa-user-secret" style="color: white;"></i>
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" href="#" style="background-color: transparent;">
-                        <i class="fas fa-user-secret" style="color: white;"></i>
-                    </a>
-                </li>
-
-            </ul>
-        </div>
-    </nav>
 
     <div class="container">
         <div class="row justify-content-center">
@@ -215,6 +54,7 @@
             });
         });
     </script>
-</body>
+    </body>
+    {% endblock content %}
 
 </html>
