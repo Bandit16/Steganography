@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 
 class EncodeMessageForm(forms.ModelForm):
-    pin = forms.CharField(max_length=4, widget=forms.PasswordInput(attrs={'value': '0000'}))
+    pin = forms.CharField(max_length=4, widget=forms.PasswordInput(attrs={'value': '0000',}))
 
     class Meta:
         model = EncodeMessage
