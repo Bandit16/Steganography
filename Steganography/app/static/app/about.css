@@ -1,0 +1,79 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    /* background-color: #f4f4f4; */
+    margin: 0;
+    padding: 0;
+}
+.about-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    /* background: white; */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+.contributors {
+    margin-top: 30px;
+    
+}
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+.team-member {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s;
+    width: 320px;
+}
+.team-member:hover {
+    transform: scale(1.05);
+}
+.team-member img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+.team-member img:hover {
+    transform: scale(1.1);
+}
+.team-member h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #222;
+}
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Adjust the gap as needed */
+}
+
+.social-icons a {
+    display: inline-block;
+    font-size: 1.2em;
+    color: white;
+    
+    background: #007bff;
+    padding: 5px 5px 5px 13px;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+.social-icons a:hover {
+    background: #0056b3;
+}
+.mission-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: linear-gradient(135deg, #007bff, #28a745);
+    color: white;
+    border-radius: 10px;
+}
