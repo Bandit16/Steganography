@@ -31,24 +31,30 @@
                     <div class="left"></div>
                     <div class="right"></div>
                 </div>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'encode_message' %}"><i class="fas fa-lock"></i>Encode Message</a>
-                </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'encode_file' %}"><i class="fas fa-file-upload"></i>Encode File</a>
+                    <a class="nav-link" href="{% url 'encode_message' %}" style="color: grey;"><i
+                            class="fas fa-lock"></i>Encode Message</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'encode_file' %}" style="color: grey;"><i
+                            class="fas fa-file-upload"></i>Encode File</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'decode_message' %}"><i class="fas fa-key"></i>Decode Message</a>
+                    <a class="nav-link" href="{% url 'decode_message' %}" style="color: grey;"><i
+                            class="fas fa-key"></i>Decode Message</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'decode_file' %}"><i class="fas fa-file-download"></i>Decode
+                    <a class="nav-link" href="{% url 'decode_file' %}" style="color: grey;"><i
+                            class="fas fa-file-download"></i>Decode
                         File</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'about' %}"><i class="fas fa-info-circle"></i>About</a>
+                    <a class="nav-link" href="{% url 'about' %}" style="color: grey;"><i
+                            class="fas fa-info-circle"></i>About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'document' %}"><i class="fas fa-file-alt"></i>Documents</a>
+                    <a class="nav-link" href="{% url 'document' %}" style="color: grey;"><i
+                            class="fas fa-file-alt"></i>Documents</a>
                 </li>
             </ul>
         </div>
