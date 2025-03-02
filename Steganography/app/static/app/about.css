@@ -9,7 +9,7 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --background-color: #121212;
-        --card-background-color: #000000;
+        --card-background-color: rgba(47, 47, 47, 0.596);
         --text-color: #ddd;
         --social-icon-background: #1a73e8;
         --social-icon-hover-background: #0c47a1;
@@ -53,6 +53,7 @@ body {
     text-align: center;
     transition: transform 0.3s;
     width: 320px;
+    height: 320px;
 }
 
 .team-member:hover {
@@ -76,11 +77,31 @@ body {
     margin: 10px 0;
     color: var(--text-color);
 }
+.know-more-btn {
+    color: white;
+    background: linear-gradient(135deg, #5e1fb0, #8e44ad);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    display: inline-block;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none; /* Remove default 3D effect */
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
 
+
+.know-more-btn:hover {
+    transform: scale(1.05);
+}
 .social-icons {
     display: flex;
     justify-content: center;
     gap: 10px;
+    padding-top: 10px;
 }
 
 .social-icons a {
