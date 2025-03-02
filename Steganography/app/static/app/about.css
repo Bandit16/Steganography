@@ -1,31 +1,52 @@
+:root {
+    --background-color: white;
+    --card-background-color: white;
+    --text-color: #222;
+    --social-icon-background: #007bff;
+    --social-icon-hover-background: #0056b3;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #121212;
+        --card-background-color: #000000;
+        --text-color: #ddd;
+        --social-icon-background: #1a73e8;
+        --social-icon-hover-background: #0c47a1;
+    }
+}
+
 body {
     font-family: 'Poppins', sans-serif;
-    /* background-color: #f4f4f4; */
+    background-color: var(--background-color);
     margin: 0;
     padding: 0;
+    color: var(--text-color);
 }
+
 .about-container {
     max-width: 900px;
     margin: 50px auto;
     padding: 30px;
-    /* background: white; */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     text-align: center;
     animation: fadeIn 1s ease-in-out;
 }
+
 .contributors {
     margin-top: 30px;
-    
 }
+
 .team-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
 }
+
 .team-member {
-    background: white;
+    background: var(--card-background-color);
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -33,9 +54,11 @@ body {
     transition: transform 0.3s;
     width: 320px;
 }
+
 .team-member:hover {
     transform: scale(1.05);
 }
+
 .team-member img {
     width: 100px;
     height: 100px;
@@ -43,33 +66,37 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s;
 }
+
 .team-member img:hover {
     transform: scale(1.1);
 }
+
 .team-member h3 {
     font-size: 1.2em;
     margin: 10px 0;
-    color: #222;
+    color: var(--text-color);
 }
+
 .social-icons {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Adjust the gap as needed */
+    gap: 10px;
 }
 
 .social-icons a {
     display: inline-block;
     font-size: 1.2em;
     color: white;
-    
-    background: #007bff;
+    background: var(--social-icon-background);
     padding: 5px 5px 5px 13px;
     border-radius: 50%;
     transition: background 0.3s;
 }
+
 .social-icons a:hover {
-    background: #0056b3;
+    background: var(--social-icon-hover-background);
 }
+
 .mission-section {
     margin-top: 40px;
     padding: 20px;
